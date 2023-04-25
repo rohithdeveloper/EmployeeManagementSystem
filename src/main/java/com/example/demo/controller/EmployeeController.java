@@ -3,6 +3,7 @@
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
@@ -23,7 +26,7 @@ public class EmployeeController {
 		private EmployeeService empService;
 		
 		@PostMapping("/employees")
-		public Employee addEmployee(@RequestBody Employee employee){
+		public Employee addEmployee(@RequestBody @Valid Employee employee){
 			return empService.saveEmployee(employee);
 		
 			
@@ -48,8 +51,17 @@ public class EmployeeController {
 		@DeleteMapping("/employees/{id}")
 		public String deleteEmployee(@PathVariable int id)
 		{
-			return empService.deleteEmployee(id);
 			
+			return empService.deleteEmployee(id);
+//			
+//			Employee emp=empService.getEmployeeById(id);
+//			if(emp==null)
+//			{
+//				throw new RuntimeException("Employee id not found:"+id);
+//			}
+//			empService.deleteEmployee(id);
+//			return "deleted successfully";
+//			
 		}
 		
 		@PutMapping("/employees/{id}")

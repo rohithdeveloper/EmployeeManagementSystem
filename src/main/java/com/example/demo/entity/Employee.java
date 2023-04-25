@@ -6,23 +6,31 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Employee")
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Employee_Id")
 	private int id;
 	
+	@NotEmpty(message = "First name is required")
+	@Size(min = 2, message = "first name should have at least 2 characters")
 	@Column(name="First_Name")
 	private String first_Name;
 	
-
+	@NotEmpty(message = "Last name is required")
+	@Size(min = 2, message = "last name should have at least 2 characters")
 	@Column(name="Last_Name")
 	private String last_Name;
 	
+	@NotEmpty(message = "Email is required")
+	@Email
 	@Column(name="Email_Id")
 	private String emailId;
 

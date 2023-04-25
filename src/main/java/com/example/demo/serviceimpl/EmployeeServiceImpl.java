@@ -55,7 +55,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 			 return "updated successfully";
 		 }
 		 else {
-			 throw new EmployeeNotFoundException("Employee id not found"+id);
+			// throw new EmployeeNotFoundException("Employee id not found"+id);
+			 return "Employee id not found";
 		 }
 		
 		 
@@ -69,8 +70,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	        if (emp.isPresent()) {
 	            this.employeedao.delete(emp.get());
-	        }
+	       
 			return "Deleted successfully"; 
+	        }
+	        else {
+	        	//throw new EmployeeNotFoundException("Employee id not found"+id);
+	        	return "Employee id not found";
+	        }
 	}
 
 	
